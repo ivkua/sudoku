@@ -2,12 +2,16 @@ package org.kryvenko.sudoku;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuFieldInput extends JFrame {
 
     private final List<List<Cell>> buttonMatrix;
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem menuItem;
 
     public SudokuFieldInput() {
         super("SUDOKU");
@@ -47,6 +51,32 @@ public class SudokuFieldInput extends JFrame {
             }
         }
         this.buttonMatrix = buttonMatrix;
+
+        this.initMenuBar();
     }
 
+    private void initMenuBar() {
+        menuBar = new JMenuBar();
+        menu =new JMenu("Setings");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menuBar.add(menu);
+        menuItem = new JMenuItem("Clear All");
+        menuItem.addActionListener(e -> clearAll());
+        menu.add(menuItem);
+        menuItem = new JMenuItem("Solve Sudoku");
+        menu.add(menuItem);
+        menuItem = new JMenuItem("Exit");
+        menuItem.addActionListener(e -> dispose());
+        menu.add(menuItem);
+
+        this.setJMenuBar(menuBar);
+    }
+
+    public void clearAll() {
+        for (List<Cell> row : buttonMatrix) {
+            for (Cell cell : row) {
+                cell.clear();
+            }
+        }
+    }
 }

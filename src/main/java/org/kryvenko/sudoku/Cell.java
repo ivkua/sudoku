@@ -2,6 +2,8 @@ package org.kryvenko.sudoku;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Cell extends JPanel {
     private CardLayout layout;
@@ -26,6 +28,18 @@ public class Cell extends JPanel {
             button.setText(Integer.toString(number));
             layout.show(this, "button");
         });
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON3) {
+                    clear();
+                }
+            }
+        });
+    }
+
+    public void clear() {
+        button.setText("");
     }
 
 
