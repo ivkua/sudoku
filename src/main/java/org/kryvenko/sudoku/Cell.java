@@ -41,7 +41,4 @@ public class Cell extends JPanel {
     public void clear() {
         button.setText("");
     }
-
-
-
 }
